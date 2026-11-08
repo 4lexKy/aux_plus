@@ -1,0 +1,81 @@
+#!/bin/bash
+
+# Copyright 2026 Tu Nombre y colaboradores
+# SPDX-License-Identifier: GPL-2.0-only
+# Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos
+# de la Licencia Pública General GNU como publicada por la Free Software Foundation,
+# ya sea la versión 2 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+#3.09.2026
+#Mostrar info completa del sistema operativo.
+
+## Hecho
+# 03.09.2026 - Uso de uname y colores i tabs
+# 03.09.2026 - Puesto CPU, RAM y discos.
+
+## Por hacer
+# Hacer que al cerrar desaparezca como htop o nano
+# Mostrar si existen conexión de red
+
+    ##COLORES
+colNeutro="\e[0m"
+#Color sistema UNAME
+colTituloS="\e[2;35m"
+colNombreS="\e[1;35m"
+#Color cpu
+colTituloC="\e[2;36m"
+colNombreC="\e[1;36m"
+#Color discos
+colTituloD="\e[2;33m"
+colNombreD="\e[1;33m"
+
+    ##Variables Globales
+saltosBase="\t"
+
+echo -e -n "$colNeutro${colTituloS}S.O. : \t$saltosBase${colNombreS}"
+uname -o
+
+echo -e -n "$colNeutro${colTituloS}Kernel: $saltosBase${colNombreS}"
+uname -s
+
+echo -e -n "$colNeutro${colTituloS}Nombre del HW: $saltosBase${colNombreS}"
+uname -m
+
+echo -e -n "$colNeutro${colTituloS}Version k: $saltosBase${colNombreS}"
+uname -v
+echo -e -n "$colNeutro${colTituloS}Release k: $saltosBase${colNombreS}"
+uname -r
+
+echo -e -n "$colNeutro${colTituloS}Nombre red: $saltosBase${colNombreS}"
+uname -n
+
+#No va:
+# uname -i
+# uname -p
+
+    ## CPU
+
+echo -e -n "$colNeutro${colTituloC}CPU: \t$saltosBase$colNombreC"
+cat /proc/cpuinfo | grep name | head -n 1 | cut -d' ' -f3-
+
+echo -e -n "$colNeutro${colTituloC}Núcleos: $saltosBase$colNombreC"
+cat /proc/cpuinfo | grep "cpu cores" | head -n 1 | cut -d' ' -f3-
+
+echo -e -n "$colNeutro${colTituloC}Hilos: \t$saltosBase$colNombreC"
+cat /proc/cpuinfo | grep siblings | head -n 1 | cut -d' ' -f2-
+
+echo -e -n "$colNeutro${colTituloC}Caché: \t$saltosBase$colNombreC"
+cat /proc/cpuinfo | grep "cache size" | head -n 1 | cut -d' ' -f3-
+
+echo -e -n "$colNeutro${colTituloC}RAM: \t$saltosBase$colNombreC"
+free -h | grep "Mem:" | cut -d' ' -f12- | cut -d' ' -f8 | tr -d '\n'
+echo -n "/"
+free -h | grep "Mem:" | cut -d' ' -f12- | cut -d' ' -f1 | tr -d '\n'
+echo
+
+    ## Discos
+echo -e "$colNeutro${colTituloD}Discos: $saltosBase$colNombreD"
+df -h 2>/dev/null | grep "/dev/"
+
+#Quitamos colores para el resto de la terminal
+echo -e -n "$colNeutro"

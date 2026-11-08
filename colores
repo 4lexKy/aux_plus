@@ -1,0 +1,112 @@
+#!/bin/bash
+
+# Copyright 2026 Tu Nombre y colaboradores
+# SPDX-License-Identifier: GPL-2.0-only
+# Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos
+# de la Licencia Pública General GNU como publicada por la Free Software Foundation,
+# ya sea la versión 2 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+#hecho 14.08.2026 (complet)
+
+# color-valor-letra-fondo
+# Negro   0   30  40
+# Rojo    1   31  41
+# Verde   2   32  42
+# Amarillo3   33  43
+# Azul    4   34  44
+# Morado  5   35  45
+# Cian    6   36  46
+# Gris    7   37  47
+# Blanco  8   38  48
+# -RESET- 9   39  49
+#
+# estilo de letra
+# Normal/Defecto      0
+# Negrita             1
+# Atenuado            2
+# Cursiva             3
+# Subrayado           4
+# Parpadeo            5
+# Parpadeo intenso    6
+# Invertido           7
+# Oculto              8
+# Tachado             9
+
+normal="\e[0m"
+
+echo
+echo "    > Neutre > \"$normal\""
+echo
+echo "    > Color de lletra    > Color de fons      > Estil de lletra"
+echo
+for (( i=0; i < 10; i++ )); do
+    colorLetra="\e[3${i}m"
+    colorFondo="\e[4${i}m"
+    colorTipo="\e[${i}m"
+    echo -n "    "
+    echo -n -e "${colorLetra}Bon día$normal"
+    echo -n "  \"$colorLetra\""
+    echo -n "    "
+    echo -n -e "${colorFondo}Bon día$normal"
+    echo -n "  \"$colorFondo\""
+    echo -n "    "
+    echo -n -e "${colorTipo}Bon día$normal"
+    echo -n "  \"$colorTipo\""
+    echo
+done
+echo
+
+colorExemple="\e[3;35;47m"
+echo -e "\tExemple:"
+echo -e -n "\t\t"
+echo "\$>echo -e \"$colorExemple MoratYblancEnCursiva $normal\""
+echo -e "\t\t\$>${colorExemple} MoratYblancEnCursiva $normal"
+echo -e -n "\t\t"
+echo "colorExemple=\"\e[3;35;47m\"; normal=\"\e[0m\""
+echo -e -n "\t\t"
+echo "\$>echo -e \"\${colorExemple} MoratYblancEnCursiva \$normal\""
+echo -e "\t\t\$>${colorExemple} MoratYblancEnCursiva $normal"
+echo
+echo "    Per a vore totes les posibles combinacions de colors executa \"$(basename $0) c\""
+echo
+
+#Si hi ha algun argument es mostren totes les combinacions de colors.
+if [[ $1 == 'c' ]]; then
+    for (( a=0; a<10; a++)); do
+    for (( b=0; b<10; b++)); do
+    for (( c=0; c<10; c++)); do
+        echo -e -n "  \e[$c;3$a;4${b}m>"
+        echo -n "\e[$c;3$a;4${b}m"
+        echo -e -n "<\e[0m"
+        if (( $c == 4 )); then
+            echo
+        fi
+    done
+        echo
+        echo
+    done
+    done
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

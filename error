@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Copyright 2026 Tu Nombre y colaboradores
+# SPDX-License-Identifier: GPL-2.0-only
+# Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos
+# de la Licencia Pública General GNU como publicada por la Free Software Foundation,
+# ya sea la versión 2 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+# Programa que devuelve el argumento que le des como return.
+# error 3  -> devolverá una salida de 3
+# 7.09.2026
+
+# Si hay algún argumento lo devuelve.
+if (( $# == 0 )); then
+    echo "Retorn: 0"
+    exit 0
+elif (( $# == 1 )); then
+    #Si no es un número no puede devolverse.
+    if [[ "$1" =~ ^[0-9]+$ ]]; then
+        echo "Retorn: $1"
+        exit $1
+    else
+        echo -e "\e[31m\tSols s'admet un sencer positiu com a valor de retorn.\e[0m"
+        echo -e "\t\tEx. $(basename $0) 2"
+        echo -e "\t\tRetorn: 2"
+    fi
+else
+    #Si hay varios elementos no puede devolverse.
+    echo -e "\e[31m\tSols s'admet un argument que serà el valor de retorn.\e[0m"
+    echo -e "\t\tEx. $(basename $0) 3"
+    echo -e "\t\tRetorn: 3"
+fi

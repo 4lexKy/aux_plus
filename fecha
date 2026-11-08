@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# Copyright 2026 Tu Nombre y colaboradores
+# SPDX-License-Identifier: GPL-2.0-only
+# Este programa es software libre: puedes redistribuirlo y/o modificarlo bajo los términos
+# de la Licencia Pública General GNU como publicada por la Free Software Foundation,
+# ya sea la versión 2 de la Licencia, o (a tu elección) cualquier versión posterior.
+
+#16.12.2025
+#Idea es mostrar fecha con un formato de inicio de línea:
+# [16.12.25-10:35:12]
+
+    #Hecho
+# - 08.03.2026 - Si se pasa un color "\e[0;34;45m" entre comillas se aplica a la fecha
+# - 13.03.2026 - Añadida la hora absoluta de linux (-s)
+
+    #Por hacer
+# - Independizar bien los argumentos
+
+    #Aviso de errores
+fecha=">si lees esto, el comando fecha ha fallado<"
+
+
+case $1 in
+    "-h")
+        echo -e "\t-r > añade retorno de carro. == -s"
+        echo -e "\t-s > añade salto de línea.   == -r"
+        echo -e "\t-a > usa año completo."
+        echo -e "\t-ar > usa año completo con salto de línea."
+        echo -e "\t\"color_de_terminal\" > añade color a la fecha"
+        echo -e -n "\t\t"
+        echo -n "fecha \"\e[0;37;41m\" -> "
+        fecha=$(date +"[%e.%m.%y-%H:%M:%S]")
+        fecha="\e[0;37;41m$fecha\e[0m"
+        echo -e "$fecha"
+        echo -e "\t(sin args) > fecha estandar"
+        echo
+        ;;
+    "-r" | "-s")
+        #Caso con salto de linea
+        fecha=$(date +"[%e.%m.%y-%H:%M:%S]")
+        echo "$fecha"
+        ;;
+    "-a")
+        #Caso con año completo + sin salto de linea
+        fecha=$(date +"[%e.%m.%Y-%H:%M:%S]")
+        echo -n "$fecha"
+        ;;
+    "-ar")
+        #Caso con año completo + Con salto de linea
+        fecha=$(date +"[%e.%m.%Y-%H:%M:%S]")
+        echo "$fecha"
+        ;;
+    "-s")
+        #Fecha absoluta de UNIX (segundos desde 1.1.1970)
+        date +%s
+        ;;
+    "")
+        #Eliminando sálto de línea a la fecha
+        fecha=$(date +"[%e.%m.%y-%H:%M:%S]")
+        echo -e -n "$fecha"
+        ;;
+    *)
+        #Eliminando sálto de línea a la fecha + color
+        normal="\e[0m"
+        if [[ "$1" == "" ]]; then
+            color="\e[0m"
+        else
+            color="$1"
+        fi
+        fecha=$(date +"[%e.%m.%y-%H:%M:%S]")
+        fecha="$color$fecha$normal"
+        echo -e -n "$fecha"
+        ;;
+esac
