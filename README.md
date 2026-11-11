@@ -1,4 +1,4 @@
-[Versión 0.5.2]: #
+[Versión 0.7.2]: #
 # aux_plus - Colección de scripts auxiliares para el desarrollo en bash
 
 En esta colección de scripts hay algunos programas y wrappers simples que permiten realizar tareas que se necesitan ocasionalmente en el desarrollo de script de bash. Algunas son un comando que no hace nada como "./nada" un comando que me muestre el MOTD para comprobar que se ve correctamente como "./yo", comprobar que muestre el return correctamente como "./error" o mostrar todas las combinaciones de colores de la terminal para elegir el mas adecuado como "./colores".
