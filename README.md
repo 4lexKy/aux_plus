@@ -9,6 +9,12 @@ En esta colección de scripts hay algunos programas y wrappers simples que permi
 - Muchos scripts se pueden mejorar en detalles menores.
 - A medida que se necesiten nuevos se iran añadiendo y mejorando.
 
+### Ficheros
+- Scripts*: colores, error, fecha, nada, sis, yo
+- LICENSE: contenido de la licencia
+- README.md: información del proyecto
+- .gitignore: define elementos a ignorar
+
 ---
 ## Instalación
 No requiere instalación
@@ -25,11 +31,13 @@ Probado en:
 
 ---
 ## Recomendación
-Para un uso mas ágil se puede crear una carpeta para scripts de forma que todos los que se añadan se puedan llamar desde la propia terminal como cualquier otro comando.
+Para un uso mas ágil se puede crear una carpeta para script de forma que todos los que se añadan se puedan llamar desde la propia terminal como cualquier otro comando.
 
 Esto se puede conseguir añadiendo a ~/.bashrc la línea:
 
->export PATH=$PATH:/ruta/a/carpeta/con/scripts
+```bash
+    export PATH=$PATH:/ruta/a/carpeta/con/scripts
+```
 
 ---
 ## Uso
@@ -84,6 +92,8 @@ Este proyecto está licenciado bajo GPLv2 - consulta el archivo LICENSE para má
 
 ---
 ## Autor
->[Alex](github.com/4lexKy)
+>**Alex**
+- Github: [https://github.com/4lexKy](https://github.com/4lexKy)
+- Email: [alex.correu@pm.me](mailto:alex.correu@pm.me)
 
 ---
